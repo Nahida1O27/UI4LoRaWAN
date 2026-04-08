@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lorawan/pages/Sys/index.dart';
+import 'package:lorawan/pages/Device/index.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -22,6 +24,12 @@ class _MainPageState extends State<MainPage> {
     },
   ];
 
+  int _currentIndex = 0;
+
+  List<Widget> _getShowWidget() {
+    return [DevicePage(),SysPage()];
+  }
+
   List<BottomNavigationBarItem> _getTabBarWidget() {
     return List.generate(_tabList.length, (int index) {
       return BottomNavigationBarItem(
@@ -39,8 +47,23 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("LoRaWAN传感器管理")),
-      bottomNavigationBar: BottomNavigationBar(items: _getTabBarWidget()),
+      appBar: AppBar(title: Text("LoRaWAN传感器管理")),
+      body: SafeArea(
+        child: IndexedStack(index: _currentIndex, children: _getShowWidget()),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        useLegacyColorScheme: false,
+        selectedItemColor: Colors.black,
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        currentIndex: _currentIndex,
+        items: _getTabBarWidget(),
+      ),
     );
   }
 }
