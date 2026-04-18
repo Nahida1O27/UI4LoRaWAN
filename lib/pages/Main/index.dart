@@ -1,3 +1,4 @@
+//Flutter项目主页面
 import 'package:flutter/material.dart';
 import 'package:lorawan/pages/Sys/index.dart';
 import 'package:lorawan/pages/Device/index.dart';
@@ -27,7 +28,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   List<Widget> _getShowWidget() {
-    return [DevicePage(),SysPage()];
+    return [DevicePage(), SysPage()];
   }
 
   List<BottomNavigationBarItem> _getTabBarWidget() {
@@ -47,14 +48,14 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("LoRaWAN传感器管理")),
+      appBar: AppBar(title: Text("LoRaWAN传感器管理"), backgroundColor: Colors.blue),
       body: SafeArea(
         child: IndexedStack(index: _currentIndex, children: _getShowWidget()),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         useLegacyColorScheme: false,
-        selectedItemColor: Colors.black,
+        selectedItemColor: Colors.blue,
         unselectedLabelStyle: TextStyle(color: Colors.black),
         onTap: (index) {
           setState(() {

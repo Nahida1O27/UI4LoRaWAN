@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lorawan/pages/Main/index.dart';
 
-Widget getRootWidget(){
+Widget getRootWidget() {
   return MaterialApp(
     //命名路由
     initialRoute: "/",
@@ -9,8 +9,8 @@ Widget getRootWidget(){
   );
 }
 
-Map<String, Widget Function(BuildContext)> getRootRoutes(){
+Map<String, Widget Function(BuildContext)> getRootRoutes() {
   return {
-    '/': (context) => const MainPage(),//主页路由
+    "/": (context) => const MainPage(), //主页路由
   };
 }

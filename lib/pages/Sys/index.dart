@@ -1,3 +1,4 @@
+//系统信息页
 import 'package:flutter/material.dart';
 
 class SysPage extends StatefulWidget {
@@ -11,10 +12,10 @@ class _SysPageState extends State<SysPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("系统管理"),
+      appBar: AppBar(title: Text("管理系统")),
+      body: SingleChildScrollView(
+        child: Column(children: []), //从上到下：系统概览、网关信息、最近活动
       ),
-      body: Center(),
     );
   }
 }
