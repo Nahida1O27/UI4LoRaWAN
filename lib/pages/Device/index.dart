@@ -19,17 +19,21 @@ class _DevicePageState extends State<DevicePage> {
           Center(child: Searchlabel()), //文本输入搜索框
           Row(children: [SizedBox()]), //四个圆角按钮
           //可滚动的传感器列表，每项为紧挨着长方形按钮，占据左右大部分空间，点击按钮跳转到具体的传感器详情页面
-          SingleChildScrollView(
-            child: Column(
-              children: List.generate(10, (index) {
-                return ElevatedButton(
-                  child: Text("传感器$index"),
-                  onPressed: () {
-                    //点击按钮跳转到具体的传感器详情页面
-                    Navigator.pushNamed(context, "/senser");
-                  },
+          Expanded(
+            child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: ElevatedButton(
+                    child: Text("传感器$index"),
+                    onPressed: () {
+                      //点击按钮跳转到具体的传感器详情页面
+                      Navigator.pushNamed(context, "/sensor");
+                    },
+                  ),
                 );
-              }),
+              },
             ),
           ),
         ],

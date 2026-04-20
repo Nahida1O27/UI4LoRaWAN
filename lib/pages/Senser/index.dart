@@ -1,14 +1,14 @@
 //传感器详情页
 import 'package:flutter/material.dart';
 
-class SenserPage extends StatefulWidget {
-  const SenserPage({super.key});
+class SensorPage extends StatefulWidget {
+  const SensorPage({super.key});
 
   @override
-  State<SenserPage> createState() => _SenserPageState();
+  State<SensorPage> createState() => _SensorPageState();
 }
 
-class _SenserPageState extends State<SenserPage> {
+class _SensorPageState extends State<SensorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
