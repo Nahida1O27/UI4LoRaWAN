@@ -13,6 +13,6 @@ Widget getRootWidget() {
 Map<String, Widget Function(BuildContext)> getRootRoutes() {
   return {
     "/": (context) => const MainPage(), //主页路由
-    "/sensr": (context) => const SensorPage(), //传感器详情路由
+    "/sensor": (context) => const SensorPage(), //传感器详情路由
   };
 }

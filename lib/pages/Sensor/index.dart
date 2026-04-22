@@ -12,16 +12,18 @@ class _SensorPageState extends State<SensorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("传感器详情")),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            Text("传感器详情"),
-            Text("设备信息"),
-            Text("最新数据"),
-            Text("设备控制"),
-            Text("温度变化"),
-            Text("电池电压"),
-          ],
+          children: List.generate(50, (int index) {
+            return Container(
+              margin: EdgeInsets.only(top: 10),
+              width: double.infinity,
+              color: Colors.blue,
+              height: 100,
+              alignment: Alignment.center,
+            );
+          }),
         ),
       ),
     );
