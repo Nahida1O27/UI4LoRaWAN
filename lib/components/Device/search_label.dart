@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Searchlabel extends StatefulWidget {
   final Function(String)? onSearch;
   final String hintText;
-  const Searchlabel({super.key, this.hintText = "搜索设备", this.onSearch});
+  const Searchlabel({super.key, this.hintText = "搜索设备名称", this.onSearch});
 
   @override
   State<Searchlabel> createState() => _SearchlabelState();
