@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lorawan/components/Device/device_card.dart';
 import 'package:lorawan/components/Device/search_label.dart';
+import 'package:lorawan/components/Device/device_button.dart';
 
 final List<Map<String, String>> _deviceInfo = [
   {"设备类型": "全部设备", "设备数量": "100", "设备数量文本颜色": "0xff66ccff"},
@@ -13,6 +14,8 @@ List<DeviceCard> _generateDeviceCards(List<Map<String, String>> info) {
     return DeviceCard(cardInfo: info[index]);
   });
 }
+
+final List<String> _deviceButtonText = ["全部设备", "在线设备", "离线设备"];
 
 class DevicePage extends StatefulWidget {
   const DevicePage({super.key});
@@ -32,8 +35,14 @@ class _DevicePageState extends State<DevicePage> {
           Center(child: Row(children: _generateDeviceCards(_deviceInfo))),
           //文本输入搜索框
           Center(child: Searchlabel()),
-          //四个圆角按钮
-          Row(children: [SizedBox()]),
+          //一行三个圆角按钮
+          Row(
+            children: [
+              DeviceButton(text: _deviceButtonText[0]),
+              DeviceButton(text: _deviceButtonText[1]),
+              DeviceButton(text: _deviceButtonText[2]),
+            ],
+          ),
           //可滚动的传感器列表，每项为紧挨着长方形按钮，占据左右大部分空间，点击按钮跳转到具体的传感器详情页面
           Flexible(
             //延迟加载列表项，优化性能
