@@ -48,7 +48,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("LoRaWAN传感器管理"), backgroundColor: Colors.blue),
+      appBar: AppBar(
+        title: Center(child: Text("LoRaWAN传感器管理")),
+        backgroundColor: Colors.blue,
+      ),
       body: SafeArea(
         child: IndexedStack(index: _currentIndex, children: _getShowWidget()),
       ),
@@ -58,9 +61,8 @@ class _MainPageState extends State<MainPage> {
         selectedItemColor: Colors.blue,
         unselectedLabelStyle: TextStyle(color: Colors.black),
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          _currentIndex = index;
+          setState(() {});
         },
         currentIndex: _currentIndex,
         items: _getTabBarWidget(),
