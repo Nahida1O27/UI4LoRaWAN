@@ -2,16 +2,16 @@
 //一个文本输入框，输入名称匹配设备名字
 import 'package:flutter/material.dart';
 
-class Searchlabel extends StatefulWidget {
+class SearchLabel extends StatefulWidget {
   final Function(String)? onSearch;
   final String hintText;
-  const Searchlabel({super.key, this.hintText = "搜索设备名称", this.onSearch});
+  const SearchLabel({super.key, this.hintText = "搜索设备名称", this.onSearch});
 
   @override
-  State<Searchlabel> createState() => _SearchlabelState();
+  State<SearchLabel> createState() => _SearchLabelState();
 }
 
-class _SearchlabelState extends State<Searchlabel> {
+class _SearchLabelState extends State<SearchLabel> {
   final TextEditingController _controller = TextEditingController();
   bool _hasText = false; //默认为空
   @override
