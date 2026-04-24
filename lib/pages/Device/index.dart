@@ -3,20 +3,6 @@ import 'package:lorawan/components/Device/device_card.dart';
 import 'package:lorawan/components/Device/search_label.dart';
 import 'package:lorawan/components/Device/device_button.dart';
 
-final List<Map<String, String>> _deviceInfo = [
-  {"设备类型": "全部设备", "设备数量": "100", "设备数量文本颜色": "0xff66ccff"},
-  {"设备类型": "在线设备", "设备数量": "81", "设备数量文本颜色": "0xff009A00"}, //深绿色
-  {"设备类型": "离线设备", "设备数量": "19", "设备数量文本颜色": "0xffcc6666"},
-];
-//把list信息传入，生成一行卡片组建
-List<DeviceCard> _generateDeviceCards(List<Map<String, String>> info) {
-  return List.generate(info.length, (int index) {
-    return DeviceCard(cardInfo: info[index]);
-  });
-}
-
-final List<String> _deviceButtonText = ["全部设备", "在线设备", "离线设备"];
-
 class DevicePage extends StatefulWidget {
   const DevicePage({super.key});
 
@@ -25,6 +11,37 @@ class DevicePage extends StatefulWidget {
 }
 
 class _DevicePageState extends State<DevicePage> {
+  final List<Map<String, String>> _deviceInfo = [
+    {"设备类型": "全部设备", "设备数量": "100", "设备数量文本颜色": "0xff66ccff"},
+    {"设备类型": "在线设备", "设备数量": "81", "设备数量文本颜色": "0xff009A00"},
+    {"设备类型": "离线设备", "设备数量": "19", "设备数量文本颜色": "0xffcc6666"},
+  ];
+  //把list信息传入，生成一行卡片组件
+  List<DeviceCard> _generateDeviceCards(List<Map<String, String>> info) {
+    return List.generate(info.length, (int index) {
+      return DeviceCard(cardInfo: info[index]);
+    });
+  }
+
+  //文件内静态变量，用于记录当前选中的按钮索引
+  static int _selectedIndex = 0;
+  final List<String> _deviceButtonText = ["全部设备", "在线设备", "离线设备"];
+  void _onButtonPressed(int index) {
+    _selectedIndex = index;
+    setState(() {});
+  }
+
+  //把list信息传入，生成一行按钮组件
+  List<DeviceButton> _generateDeviceButtons(List<String> text) {
+    return List.generate(text.length, (int index) {
+      return DeviceButton(
+        text: text[index],
+        isSelected: _selectedIndex == index,
+        onPressed: () => _onButtonPressed(index),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,15 +51,9 @@ class _DevicePageState extends State<DevicePage> {
           //总设备|在线设备|离线设备
           Center(child: Row(children: _generateDeviceCards(_deviceInfo))),
           //文本输入搜索框
-          Center(child: Searchlabel()),
+          Center(child: SearchLabel()),
           //一行三个圆角按钮
-          Row(
-            children: [
-              DeviceButton(text: _deviceButtonText[0]),
-              DeviceButton(text: _deviceButtonText[1]),
-              DeviceButton(text: _deviceButtonText[2]),
-            ],
-          ),
+          Row(children: _generateDeviceButtons(_deviceButtonText)),
           //可滚动的传感器列表，每项为紧挨着长方形按钮，占据左右大部分空间，点击按钮跳转到具体的传感器详情页面
           Flexible(
             //延迟加载列表项，优化性能
