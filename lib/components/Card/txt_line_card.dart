@@ -1,6 +1,7 @@
 //统一风格的卡片组件
 //以便代码复用和继承
 import 'package:flutter/material.dart';
+import 'package:lorawan/components/Card/txt_line.dart';
 
 //准确来说，每张卡片应该拿到一个键值对的列表（List<Map<String,String>>），
 //每个键值对表示卡片的一行内容，键是居左文本，值是居右文本
@@ -44,52 +45,14 @@ class TextLineCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //卡片第一行开始
-            Row(
-              //卡片标题和刷新按钮之间的间距
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-                //if (onRefresh != null)
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: onRefresh,
-                  iconSize: 20,
-                ),
-              ],
-            ),
+            FirstTextLine(title: title, onRefresh: onRefresh),
             //卡片第一行结束
 
             //卡片的第二三四...行
             if (data != null && data!.isNotEmpty) ...[
               ...data!.asMap().entries.map((entry) {
                 final item = entry.value;
-                return Column(
-                  children: [
-                    //行与行之间的分割线
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      child: const Divider(
-                        height: 0,
-                        thickness: 1.5,
-                        color: Color.fromARGB(255, 214, 214, 214),
-                      ),
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(item.keys.first, style: TextStyle(fontSize: 13)),
-                        Text(item.values.first, style: TextStyle(fontSize: 13)),
-                      ],
-                    ),
-                  ],
-                );
+                return TextLine(data: item);
               }),
             ],
 
