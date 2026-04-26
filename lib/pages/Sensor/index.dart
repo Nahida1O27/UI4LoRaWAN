@@ -9,11 +9,13 @@ class SensorPage extends StatefulWidget {
 }
 
 class _SensorPageState extends State<SensorPage> {
+  final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("传感器详情")),
       body: SingleChildScrollView(
+        controller: _controller,
         child: Column(
           children: List.generate(50, (int index) {
             return Container(
