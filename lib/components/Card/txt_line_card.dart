@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 //每个键值对表示卡片的一行内容，键是居左文本，值是居右文本
 //除了卡片标题这一行，每行文本上面用分割线隔开。
 
-class CustomCard extends StatelessWidget {
+class TextLineCard extends StatelessWidget {
   final String title;
   final List<Map<String, String>>? data;
   final Widget? child;
@@ -16,7 +16,7 @@ class CustomCard extends StatelessWidget {
   final Color? color;
   final double borderRadius;
 
-  const CustomCard({
+  const TextLineCard({
     super.key,
     required this.title,
     this.data,
@@ -41,7 +41,7 @@ class CustomCard extends StatelessWidget {
         padding: padding,
         child: Column(
           //卡片内容左对齐
-          //crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //卡片第一行开始
             Row(
@@ -64,20 +64,37 @@ class CustomCard extends StatelessWidget {
               ],
             ),
             //卡片第一行结束
-            //行与行之间的分割线
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: Divider(
-                height: 0,
-                thickness: 2.5,
-                color: Color.fromARGB(255, 214, 214, 214),
-              ),
-            ),
-            Row(
-              //卡片标题和刷新按钮之间的间距
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("这是第二行文本", style: TextStyle(fontSize: 13))],
-            ),
+
+            //卡片的第二三四...行
+            if (data != null && data!.isNotEmpty) ...[
+              ...data!.asMap().entries.map((entry) {
+                final item = entry.value;
+                return Column(
+                  children: [
+                    //行与行之间的分割线
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: const Divider(
+                        height: 0,
+                        thickness: 1.5,
+                        color: Color.fromARGB(255, 214, 214, 214),
+                      ),
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(item.keys.first, style: TextStyle(fontSize: 13)),
+                        Text(item.values.first, style: TextStyle(fontSize: 13)),
+                      ],
+                    ),
+                  ],
+                );
+              }),
+            ],
+
+            //最后一行下方填充空间，看上去别那么挤
+            Padding(padding: const EdgeInsets.symmetric(vertical: 3)),
           ],
         ),
       ),
