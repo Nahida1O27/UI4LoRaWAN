@@ -1,5 +1,24 @@
 //传感器详情页
 import 'package:flutter/material.dart';
+import 'package:lorawan/components/Card/txt_line_card.dart';
+
+final List<String> _cardTitles = ["设备信息", "最新数据", "设备控制", "数据历史"];
+final List<List<Map<String, String>>> _cardData = [
+  [
+    {"设备名称": "1234567890"},
+    {"设备EUI": "设备ID"},
+    {"应用ID": "index"},
+    {"应用名称": "CO2"},
+  ],
+  [
+    {"电池": "3.82V"},
+    {"温度": "23.8℃"},
+    {"角度": "176.4°"},
+    {"湿度": "40.8"},
+    {"CO2": "362"},
+    {"距离": "-"},
+  ],
+];
 
 class SensorPage extends StatefulWidget {
   const SensorPage({super.key});
@@ -17,15 +36,10 @@ class _SensorPageState extends State<SensorPage> {
       body: SingleChildScrollView(
         controller: _controller,
         child: Column(
-          children: List.generate(50, (int index) {
-            return Container(
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              color: Colors.blue,
-              height: 100,
-              alignment: Alignment.center,
-            );
-          }),
+          children: [
+            TextLineCard(title: _cardTitles[0], data: _cardData[0]),
+            TextLineCard(title: _cardTitles[1], data: _cardData[1]),
+          ],
         ),
       ),
     );
