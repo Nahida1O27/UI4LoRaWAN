@@ -1,6 +1,8 @@
 //传感器详情页
 import 'package:flutter/material.dart';
 import 'package:lorawan/components/Card/txt_line_card.dart';
+import 'package:lorawan/components/Card/ctrl_card.dart';
+import 'package:lorawan/components/Card/chart_card.dart';
 
 final List<String> _cardTitles = ["设备信息", "最新数据", "设备控制", "数据历史"];
 final List<List<Map<String, String>>> _cardData = [
@@ -39,6 +41,9 @@ class _SensorPageState extends State<SensorPage> {
           children: [
             TextLineCard(title: _cardTitles[0], data: _cardData[0]),
             TextLineCard(title: _cardTitles[1], data: _cardData[1]),
+            ControlCard(title: _cardTitles[2]),
+
+            ChartCard(title: _cardTitles[3]),
           ],
         ),
       ),
