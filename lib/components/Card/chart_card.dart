@@ -2,35 +2,31 @@
 import 'package:flutter/material.dart';
 import 'package:lorawan/components/Card/card_base.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'dart:math' as Math;
 
 //放置折线图的卡片
 class ChartCard extends CardBase {
   const ChartCard({super.key, required super.title, super.onRefresh});
   @override
   List<Widget> buildCardContent(BuildContext context) {
-    //先放一个y=e^x(-5<x<5)的图，后续再完善
     return [
-      SizedBox(
-        height: 500,
+      Container(
+        margin: EdgeInsets.all(8),
+        height: 200,
         child: LineChart(
           LineChartData(
             lineBarsData: [
               LineChartBarData(
-                spots: List.generate(100, (index) {
-                  double x = index / 10 - 5;
-                  return FlSpot(x, Math.exp(x));
+                spots: List.generate(11, (index) {
+                  double x = index - 5;
+                  return FlSpot(x, 2 * x);
                 }),
                 isCurved: true,
-                barWidth: 1,
+                barWidth: 3,
                 color: Colors.blue,
               ),
             ],
             titlesData: FlTitlesData(
-              leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(showTitles: true),
-              ),
+              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             ),
           ),
         ),
@@ -44,6 +40,27 @@ class TableCard extends CardBase {
   const TableCard({super.key, required super.title});
   @override
   List<Widget> buildCardContent(BuildContext context) {
-    return [Container()];
+    return [
+      DataTable(
+        columns: [
+          DataColumn(label: Text("列1")),
+          DataColumn(label: Text("列2")),
+          DataColumn(label: Text("列3")),
+          DataColumn(label: Text("列4")),
+          DataColumn(label: Text("列5")),
+        ],
+        rows: List.generate(10, (index) {
+          return DataRow(
+            cells: [
+              DataCell(Text("行$index")),
+              DataCell(Text("行$index")),
+              DataCell(Text("行$index")),
+              DataCell(Text("行$index")),
+              DataCell(Text("行$index")),
+            ],
+          );
+        }),
+      ),
+    ];
   }
 }
