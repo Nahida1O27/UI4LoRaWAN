@@ -62,7 +62,7 @@ class _DevicePageState extends State<DevicePage> {
           //一行三个圆角按钮
           Row(children: _generateDeviceButtons(_deviceButtonText)),
           //传感器列表：所有项组成一个大圆角卡片，每项带在线状态指示灯
-          Expanded(child: SensorList(sensorInfo: _sensorInfo)),
+          Flexible(child: SensorList(sensorInfo: _sensorInfo)),
         ],
       ),
     );

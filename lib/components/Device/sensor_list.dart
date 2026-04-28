@@ -19,6 +19,7 @@ class SensorList extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         //生成传感器列表项
         child: ListView.builder(
+          shrinkWrap: true,
           itemCount: sensorInfo.length,
           itemBuilder: (context, index) => _buildSensorItem(context, index),
         ),
