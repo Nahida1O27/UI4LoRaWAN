@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lorawan/components/Device/device_card.dart';
 import 'package:lorawan/components/Device/search_label.dart';
 import 'package:lorawan/components/Device/device_button.dart';
+import 'package:lorawan/components/Device/sensor_list.dart';
 
 class DevicePage extends StatefulWidget {
   const DevicePage({super.key});
@@ -11,6 +12,12 @@ class DevicePage extends StatefulWidget {
 }
 
 class _DevicePageState extends State<DevicePage> {
+  //传感器列表
+  final List<MapEntry<bool, String>> _sensorInfo = [
+    MapEntry(true, "123456"),
+    MapEntry(false, "789012"),
+    MapEntry(true, "345678"),
+  ];
   final List<Map<String, String>> _deviceInfo = [
     {"设备类型": "全部设备", "设备数量": "100", "设备数量文本颜色": "0xff66ccff"},
     {"设备类型": "在线设备", "设备数量": "81", "设备数量文本颜色": "0xff009A00"},
@@ -54,25 +61,8 @@ class _DevicePageState extends State<DevicePage> {
           Center(child: SearchLabel()),
           //一行三个圆角按钮
           Row(children: _generateDeviceButtons(_deviceButtonText)),
-          //可滚动的传感器列表，每项为紧挨着长方形按钮，占据左右大部分空间，点击按钮跳转到具体的传感器详情页面
-          Flexible(
-            //延迟加载列表项，优化性能
-            child: ListView.builder(
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.0),
-                  child: ElevatedButton(
-                    child: Text("传感器$index"),
-                    onPressed: () {
-                      //点击按钮跳转到具体的传感器详情页面
-                      Navigator.pushNamed(context, "/sensor");
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+          //传感器列表：所有项组成一个大圆角卡片，每项带在线状态指示灯
+          Expanded(child: SensorList(sensorInfo: _sensorInfo)),
         ],
       ),
     );

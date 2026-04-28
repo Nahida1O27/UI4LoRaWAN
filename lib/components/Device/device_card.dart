@@ -20,9 +20,11 @@ class DeviceCard extends StatelessWidget {
       ), //容器外部间距
       padding: EdgeInsets.all(10), //容器内部间距
       decoration: BoxDecoration(
-        color: Colors.white70,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.black, width: 0.1),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 2)),
+        ],
       ),
       child: Column(
         children: [
