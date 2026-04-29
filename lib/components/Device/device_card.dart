@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
 
-//单个卡片组件
+//设备卡片容器组件 - 包含三个卡片
 class DeviceCard extends StatelessWidget {
-  final Map<String, String> cardInfo;
-  const DeviceCard({super.key, required this.cardInfo});
+  final List<String> cardInfo;
+  final bool isLast;
+  const DeviceCard({super.key, required this.cardInfo, this.isLast = false});
 
   @override
   Widget build(BuildContext context) {
-    final double containerWidth = MediaQuery.of(context).size.width * 11 / 36;
-    final double containerMargin =
-        (MediaQuery.of(context).size.width - 3 * containerWidth) / 6.0;
     return Container(
-      //根据屏幕宽度，每个卡片占1/3个屏幕（算上预留的空间）
-      width: containerWidth,
       height: 75,
-      margin: EdgeInsets.symmetric(
-        horizontal: containerMargin,
-        vertical: 5,
-      ), //容器外部间距
-      padding: EdgeInsets.all(10), //容器内部间距
+      margin: isLast ? EdgeInsets.zero : const EdgeInsets.only(right: 8),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 2)),
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
         ],
       ),
       child: Column(
+        //Column内文本居中放置
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            cardInfo["设备数量"]!,
+            cardInfo[1],
             style: TextStyle(
               fontSize: 20,
-              color: Color(int.parse(cardInfo["设备数量文本颜色"]!)),
+              color: Color(int.parse(cardInfo[2])),
             ),
           ),
           Text(
-            cardInfo["设备类型"]!,
-            style: TextStyle(fontSize: 13, color: Colors.black),
+            cardInfo[0],
+            style: const TextStyle(fontSize: 13, color: Colors.black),
           ),
         ],
       ),

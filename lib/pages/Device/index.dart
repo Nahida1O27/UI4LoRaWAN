@@ -18,16 +18,27 @@ class _DevicePageState extends State<DevicePage> {
     MapEntry(false, "789012"),
     MapEntry(true, "345678"),
   ];
-  final List<Map<String, String>> _deviceInfo = [
-    {"设备类型": "全部设备", "设备数量": "100", "设备数量文本颜色": "0xff66ccff"},
-    {"设备类型": "在线设备", "设备数量": "81", "设备数量文本颜色": "0xff009A00"},
-    {"设备类型": "离线设备", "设备数量": "19", "设备数量文本颜色": "0xffcc6666"},
+
+  List<MapEntry<bool, String>> info = [];
+  final List<List<String>> _deviceInfo = [
+    ["全部设备", "100", "0xff66ccff"],
+    ["在线设备", "81", "0xff009A00"],
+    ["离线设备", "19", "0xffcc6666"],
   ];
-  //把list信息传入，生成一行卡片组件
-  List<DeviceCard> _generateDeviceCards(List<Map<String, String>> info) {
-    return List.generate(info.length, (int index) {
-      return DeviceCard(cardInfo: info[index]);
-    });
+  Widget _buildDeviceCards(List<List<String>> cardsInfo) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: List.generate(cardsInfo.length, (index) {
+          return Expanded(
+            child: DeviceCard(
+              cardInfo: cardsInfo[index],
+              isLast: index == cardsInfo.length - 1,
+            ),
+          );
+        }),
+      ),
+    );
   }
 
   //文件内静态变量，用于记录当前选中的按钮索引
@@ -35,11 +46,21 @@ class _DevicePageState extends State<DevicePage> {
   final List<String> _deviceButtonText = ["全部设备", "在线设备", "离线设备"];
   void _onButtonPressed(int index) {
     _selectedIndex = index;
+    info = _sensorInfo;
+    //根据选中的按钮索引，更新传感器列表
+    //如果index==0，info=_sensorInfo
+    //如果index==1，info=_sensorInfo中所有项的key为true的项
+    //如果index==2，info=_sensorInfo中所有项的key为false的项
+    if (index == 1) {
+      info = _sensorInfo.where((element) => element.key).toList();
+    } else if (index == 2) {
+      info = _sensorInfo.where((element) => !element.key).toList();
+    }
     setState(() {});
   }
 
-  //把list信息传入，生成一行按钮组件
-  List<DeviceButton> _generateDeviceButtons(List<String> text) {
+  //把 list 信息传入，生成一行按钮组件
+  List<DeviceButton> _buildDeviceButtons(List<String> text) {
     return List.generate(text.length, (int index) {
       return DeviceButton(
         text: text[index],
@@ -56,13 +77,13 @@ class _DevicePageState extends State<DevicePage> {
       body: Column(
         children: [
           //总设备|在线设备|离线设备
-          Center(child: Row(children: _generateDeviceCards(_deviceInfo))),
+          _buildDeviceCards(_deviceInfo),
           //文本输入搜索框
           Center(child: SearchLabel()),
           //一行三个圆角按钮
-          Row(children: _generateDeviceButtons(_deviceButtonText)),
+          Row(children: _buildDeviceButtons(_deviceButtonText)),
           //传感器列表：所有项组成一个大圆角卡片，每项带在线状态指示灯
-          Flexible(child: SensorList(sensorInfo: _sensorInfo)),
+          Flexible(child: SensorList(sensorInfo: info)),
         ],
       ),
     );
