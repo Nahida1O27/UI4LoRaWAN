@@ -23,8 +23,9 @@ class TextLineCard extends CardBase {
   List<Widget> buildCardContent(BuildContext context) {
     return data != null && data!.isNotEmpty
         ? data!.asMap().entries.map((entry) {
+            final idx = entry.key;
             final item = entry.value;
-            return TextLine(data: item);
+            return TextLine(data: item, isLast: idx == data!.length - 1);
           }).toList()
         : [];
   }

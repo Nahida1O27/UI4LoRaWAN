@@ -18,7 +18,7 @@ abstract class CardBase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 14.0),
       color: Color.fromARGB(255, 245, 245, 245), //卡片背景颜色和背景有所区别
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -30,7 +30,7 @@ abstract class CardBase extends StatelessWidget {
           //卡片内容左对齐
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //卡片第一行开始
+            //卡片第一行开始——标题行带底部分割线
             FirstTextLine(title: title, onRefresh: onRefresh),
             //卡片第一行结束
 
