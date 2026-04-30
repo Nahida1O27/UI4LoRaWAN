@@ -37,7 +37,14 @@ class ControlCard extends CardBase {
               //尽量让按钮占满宽度
               minimumSize: Size(double.infinity, 40),
             ),
-            onPressed: () {}, //暂时不实现功能
+            onPressed: () async {
+              await showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (context) =>
+                    AlertDialog(title: Text(_buttonText[index])),
+              );
+            }, //暂时不实现功能
             child: Text(_buttonText[index]),
           ),
         ),

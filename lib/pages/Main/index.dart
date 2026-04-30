@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     },
   ];
 
-  int _currentIndex = 0;
+  static int _currentIndex = 0;
 
   List<Widget> _getShowWidget() {
     return [DevicePage(), SysPage()];
