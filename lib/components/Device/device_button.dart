@@ -14,20 +14,15 @@ class DeviceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        //选中时，蓝底白字；未选中时，白底蓝字
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.blue : Colors.white,
-          foregroundColor: isSelected ? Colors.white : Colors.blue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        child: Text(text),
+    return ElevatedButton(
+      onPressed: onPressed,
+      //选中时，蓝底白字；未选中时，白底蓝字
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.blue : Colors.white,
+        foregroundColor: isSelected ? Colors.white : Colors.blue,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),
+      child: Text(text),
     );
   }
 }

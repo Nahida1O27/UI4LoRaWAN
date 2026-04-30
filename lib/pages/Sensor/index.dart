@@ -50,4 +50,10 @@ class _SensorPageState extends State<SensorPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
