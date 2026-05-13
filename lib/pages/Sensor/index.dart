@@ -4,21 +4,23 @@ import 'package:lorawan/components/Card/txt_line_card.dart';
 import 'package:lorawan/components/Card/ctrl_card.dart';
 import 'package:lorawan/components/Card/chart_card.dart';
 
-final List<String> _cardTitles = ["设备信息", "最新数据", "设备控制", "数据历史", "数据变化"];
+final List<String> _cardTitles = [
+  "设备信息",
+  "最新数据",
+  "设备控制",
+  "数据历史",
+  "温度变化",
+  "湿度变化",
+];
 final List<List<Map<String, String>>> _cardData = [
   [
-    {"设备名称": "1234567890"},
-    {"设备EUI": "设备ID"},
-    {"应用ID": "index"},
-    {"应用名称": "CO2"},
+    {"设备名称": "123456"},
+    {"应用ID": "1"},
+    {"应用名称": "桌面的温湿度传感器"},
   ],
   [
-    {"电池": "3.82V"},
-    {"温度": "23.8℃"},
-    {"角度": "176.4°"},
-    {"湿度": "40.8"},
-    {"CO2": "362"},
-    {"距离": "-"},
+    {"温度": "29.0℃"},
+    {"湿度": "54.0%"},
   ],
 ];
 
@@ -45,6 +47,7 @@ class _SensorPageState extends State<SensorPage> {
 
             TableCard(title: _cardTitles[3]),
             ChartCard(title: _cardTitles[4]),
+            ChartCard(title: _cardTitles[5]),
           ],
         ),
       ),
